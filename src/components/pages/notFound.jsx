@@ -1,19 +1,22 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import error from "../../assets/404Hero.png";
+import "../cssPages/notfound404.css";
 
 const notFound = () => {
   return (
-    <div className="text-center">
-      <h1>Error 404 - Página no encontrada</h1>
-      <p>Lo sentimos, la página que estás buscando no existe.</p>
-      {/* Aquí puedes usar un enlace si estás utilizando enrutamiento */}
-      {/* <Link to="/"> */}
-      {/*   <Button variant="primary">Volver al inicio</Button> */}
-      {/* </Link> */}
-      {/* O simplemente un botón que redireccione */}
-      <Button variant="primary" onClick={() => window.location.href = '/'}>Volver al inicio</Button>
+    <section className="text-center mb-4">
+    <img className="error-img" src={error} alt="error 404" />
+    <div>
+      <h3>OOPSSS!! Nada delicioso fue encontrado aquí!</h3>
+      <div className="d-inline-block">
+        <Link className="boton btn text-black btn-outline-light nav-link" to="/home">
+          Volver al Inicio
+        </Link>
+      </div>
     </div>
+  </section>
+  
   );
 };
 
