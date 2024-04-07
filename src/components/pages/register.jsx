@@ -1,77 +1,71 @@
 import React, { useState } from 'react';
-import { Form, Button, Container } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import bannerRegister from "../../assets/bannerRegister.jpg"
+import "../cssPages/register.css"
 
-const register = () => {
-  const [name, setName] = useState('');
+function Registro() {
+  const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleNameChange = (e) => {
-    setName(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar la lógica de registro, como enviar los datos al servidor
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Aquí puedes agregar la lógica para redirigir al usuario después del registro
+    // Aquí puedes realizar cualquier lógica de validación que necesites
+    // En este ejemplo, simplemente mostraremos los datos en la consola
+    console.log({ nombre, email, password });
   };
 
   return (
-    <Container>
-      <div className="mt-5">
-        <h2>Registro</h2>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formBasicName">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Ingresa tu nombre"
-              value={name}
-              onChange={handleNameChange}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="Ingresa tu email"
-              value={email}
-              onChange={handleEmailChange}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={handlePasswordChange}
-              required
-            />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Registrarse
-          </Button>
-        </Form>
-      </div>
-    </Container>
+    <Container className="d-flex justify-content-center align-items-center h-100">
+    <Row>
+      <Col md={6}>
+        <img className='img-fluid my-4 h-75' src={bannerRegister} alt="Imagen de registro" />
+      </Col>
+      <Col md={6}>
+        <div className="d-flex justify-content-start align-items-start flex-column">
+          <h2 className=' mt-4'>Registro</h2>
+          <Form  className= "mt-4"onSubmit={handleSubmit}>
+            <Form.Group controlId="formNombre">
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ingrese su nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+              />
+            </Form.Group>
+  
+            <Form.Group controlId="formEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Ingrese su email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </Form.Group>
+  
+            <Form.Group controlId="formPassword">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Ingrese su contraseña"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+  
+            <Button variant="primary" type="submit">
+              Registrarse
+            </Button>
+          </Form>
+        </div>
+      </Col>
+    </Row>
+  </Container>
+  
+  
   );
-};
+}
 
-export default register;
+export default Registro;
