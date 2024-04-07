@@ -5,7 +5,7 @@ import Home from "./components/pages/home";
 import Login from "./components/pages/login";
 import Register from "./components/pages/register";
 import NotFound from "./components/pages/notFound";
-
+import Menu from "./components/common/Menu";
 import Footer from "./components/common/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -13,6 +13,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
+    <Menu></Menu>
       <Routes>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route exact path="/login" element={<Login></Login>}></Route>
