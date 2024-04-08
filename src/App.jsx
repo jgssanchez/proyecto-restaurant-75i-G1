@@ -9,6 +9,7 @@ import Menu from "./components/common/Menu";
 import Footer from "./components/common/footer";
 import Nosotros from "./components/pages/Nosotros";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (
