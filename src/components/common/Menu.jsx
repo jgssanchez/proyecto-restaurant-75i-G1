@@ -45,7 +45,7 @@ const Menu = () => {
           <Nav.Link href="/home" className={`${opaco ? "text-white" : "text-black"} `}>Inicio</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link eventKey="link-1" className={`${opaco ? "text-white" : "text-black"} `}>Nosotros</Nav.Link>
+          <Nav.Link href="/nosotros" className={`${opaco ? "text-white" : "text-black"} `}>Nosotros</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="link-2" className={`nav-link ${opaco ? "text-white" : "text-black"} hover-text`} >Productos</Nav.Link>

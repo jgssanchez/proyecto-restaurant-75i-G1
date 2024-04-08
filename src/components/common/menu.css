@@ -10,7 +10,7 @@
     color: #232222;
   }
 .nav-link .hover-text:hover{
-color: yellow
+color: #fdc500
  }
   
   @media (max-width: 576px) and (max-width: 768px) {
