@@ -38,7 +38,7 @@ const Nosotros = () => {
       </Accordion.Item>
     </Accordion>
     </Container>
-    <Container fluid className="d-flex justify-content-center align-items-center">
+    <Container fluid className="d-flex justify-content-center align-items-center mb-2">
     <Row>
         <Col><Card style={{ width: '18rem' }} className='card-us'>
          <Card.Header  className=" bg-warning "></Card.Header>
