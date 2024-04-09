@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Navbar, Container, Nav,Row, Col} from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 import '../common/menu.css'; 
+import logo from "../../assets/logo-sinbg.png"
 
 const Menu = () => {
     const [opaco, setOpaco] = useState(false);
@@ -28,13 +29,17 @@ const Menu = () => {
         backgroundColor: opaco ? "#232222" : "transparent",
        
       }}>
-        
-    <Navbar.Brand>
-        <img className= "img-fluid min-sm-vw-25" src="../../assets/Lotus-logo.png"></img>
+        <div className="d-flex flex-row justify-content-between align-items-center"> 
+    <Navbar.Brand >
+        <img className= "img-fluid me-md-4 " src={logo}></img>
     </Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
+        <Navbar.Toggle aria-controls="navbarScroll" style={{
+        backgroundColor: opaco ? "white" : "transparent",
+       
+      }}  className="ms-md-5"></Navbar.Toggle> 
+</div>
         <Navbar.Collapse id="navbarScroll">
-          <Nav variant="tabs" className="justify-content-center  text-center"
+          <Nav variant="tabs" className="justify-content-center align-items-center text-center"
             style={{ maxHeight: '100px',
         
         }}
