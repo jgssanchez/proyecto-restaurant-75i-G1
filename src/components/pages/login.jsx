@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Form, Button, Container,Row,Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
-import "../cssPages/loginCss.css"
+import "../cssPages/loginCss.css";
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -17,10 +19,28 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes manejar la lógica de inicio de sesión, como enviar los datos al servidor
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Aquí puedes agregar la lógica para redirigir al usuario después del inicio de sesión
+    
+    
+    let isValid = true;
+    setEmailError('');
+    setPasswordError('');
+
+    if (!email) {
+      setEmailError('Por favor, ingresa tu correo electrónico.');
+      isValid = false;
+    }
+
+    if (!password) {
+      setPasswordError('Por favor, ingresa tu contraseña.');
+      isValid = false;
+    }
+
+    if (isValid) {
+
+      console.log('Email:', email);
+      console.log('Password:', password);
+     
+    }
   };
 
   return (
@@ -42,31 +62,32 @@ const Login = () => {
             </h2>
           </Col>
         </Row>
-        <Row className="formbox justify-content-center ">
-          <Col>
-            <h3>Log In</h3>
-            <Form id="form" action="" method="post">
-              <Form.Group controlId="username">
-                <Form.Label>Username</Form.Label>
-                <Form.Control type="text" name="username" />
-              </Form.Group>
-              <Form.Group controlId="password">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" name="password" />
-              </Form.Group>
-              <Button className="botonForm my-2 bg-transparent" id="btn" type="submit">
-                Log In
-              </Button>
-              <Form.Group>
-                <Form.Label>Eres nuevo aqui?</Form.Label>
-                <Link href="register.html" className="mainbox" to="/register">
-                  Register Now
-                </Link>
-              </Form.Group>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
+        <div className="d-flex justify-content-center align-items-center vh-100">
+        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '20px', borderRadius: '10px' }}>
+        <h2 className="mb-4">Registro</h2>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group controlId="formName">
+            <Form.Label>Nombre</Form.Label>
+            <Form.Control type="text" placeholder="Ingresa tu nombre" name="name" value={formData.name} onChange={handleChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formEmail">
+            <Form.Label>Correo electrónico</Form.Label>
+            <Form.Control type="email" placeholder="Ingresa tu correo electrónico" name="email" value={formData.email} onChange={handleChange} />
+          </Form.Group>
+
+          <Form.Group controlId="formPassword">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control type="password" placeholder="Ingresa tu contraseña" name="password" value={formData.password} onChange={handleChange} />
+          </Form.Group>
+
+          <Button variant="primary" type="submit">
+            Registrarse
+          </Button>
+        </Form>
+      </div>
+    </div>
+    </Container>
     </div>
   );
 };
