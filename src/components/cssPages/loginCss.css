@@ -1,82 +1,83 @@
-
-@import url('https://fonts.googleapis.com/css?family=Dancing+Script|Lato');
-:root{
-    --primaryred:#fdc500;
-    --secondaryred:#fdc600ca;
-    --lightblack:#222b31;
-    --darkblack:#191c1f;
-    --mainfont:'Dancing Script', cursive;
-    --secondfont: 'Lato', sans-serif;
+@import url("https://fonts.googleapis.com/css?family=Dancing+Script|Lato");
+:root {
+    --primaryred: #fdc500;
+    --secondaryred: #fdc600ca;
+    --lightblack: #222b31;
+    --darkblack: #191c1f;
+    --mainfont: "Dancing Script", cursive;
+    --secondfont: "Lato", sans-serif;
 }
-body{
-	margin: 0;
-	padding: 0;
-	 font-size: 16px;
-	line-height: 1.5;
-	font-family:var(--secondfont);
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: var(--secondfont);
 }
-*,*:before,*:after{
-	box-sizing: border-box;
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
 }
-img{
-	max-width: 100%;
-	height: auto;
+/* Modifiqué esto, para que deje de afectar a los estilos en la homePage, sin dejar de afectar a los de la pagina de login --Joaquin-- */
+.fullcontent img {
+    max-width: 100%;
+    height: auto;
 }
-.fullcontent{
-    width:100%;
+.fullcontent {
+    width: 100%;
     min-height: 100vh;
     height: 50%;
-    padding:6% 10% 5% 10%;
+    padding: 6% 10% 5% 10%;
     background-image: url(img/b.jpg);
-    background:linear-gradient(rgba(0, 0, 0, 0.70), rgba(0, 0, 0, 0.70)),url(https://images.pexels.com/photos/7364196/pexels-photo-7364196.jpeg);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url(https://images.pexels.com/photos/7364196/pexels-photo-7364196.jpeg);
     background-size: cover;
     background-position: 50% 50%;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-.headings{
-
+.headings {
     flex-basis: 65%;
     margin-right: 5%;
 }
-.headings h1{
+.headings h1 {
     font-size: 4rem;
-    font-family:var(--mainfont);
-    color:white;
-    margin:3% 0% 3% 0%;
+    font-family: var(--mainfont);
+    color: white;
+    margin: 3% 0% 3% 0%;
 }
-.headings h2{
-	font-size:1.2rem;
+.headings h2 {
+    font-size: 1.2rem;
     font-weight: 300;
     color: rgba(255, 255, 255, 0.5);
 }
-.formbox{
-    background:rgb(34,43,49,0.7);
-    color:white;
+.formbox {
+    background: rgb(34, 43, 49, 0.7);
+    color: white;
     flex-basis: 35%;
     border-top: 10px solid var(--secondaryred);
-    padding:2% 3%;
-    
+    padding: 2% 3%;
+
     width: 600px;
- 
 }
-.formbox *{
+.formbox * {
     margin: 0;
 }
-.formbox h3{
+.formbox h3 {
     font-family: var(--mainfont);
     font-size: 1.5rem;
     margin-bottom: 1rem;
 }
-.formbox form label{
+.formbox form label {
     color: rgba(255, 255, 255, 0.659);
     display: inline-block;
     max-width: 500px;
     margin-bottom: 0.3rem;
     justify-content: flex-start;
 }
-.formbox form .asd{
+.formbox form .asd {
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: none;
     background: transparent;
@@ -86,7 +87,7 @@ img{
     border-radius: 4px;
     margin-bottom: 1rem;
 }
-form .mainbox{
+form .mainbox {
     color: white;
     box-shadow: none;
     background: var(--secondaryred);
@@ -99,13 +100,12 @@ form .mainbox{
     text-decoration: none;
     border: none;
 }
-a .mainbox{
+a .mainbox {
     margin: 0;
     padding: 2%;
-} 
- .container{
+}
+.container {
     width: 100%;
     margin: 0 auto;
     padding: 0 10px;
- 
- }
+}

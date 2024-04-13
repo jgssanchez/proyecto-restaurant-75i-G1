@@ -1,31 +1,79 @@
-import "../css/home.css";
+import "../cssPages/home.css";
 import { useState } from "react";
 import homeBannerImg from "../../assets/homeBannerImg.jpg";
 import homeAboutUsImg from "../../assets/homeAboutUsImg.png";
 import polloAlCurry from "../../assets/polloAlCurry.png";
 
-/* Eliminar cuando se una la logica */
+/*-------------- Eliminar cuando se una la logica --------------*/
 const plato1 = {
-    name: "1.POLLO AL CURRY ROJO",
-    desc: "Filete de Pollo salteado con curry rojo y arroz.",
+    name: "PLATO NUMERO 1",
+    state: true,
+    price: 5600,
+    details: "Filete de Pollo salteado con curry rojo y arroz.",
     img: polloAlCurry,
 };
-/*  */
+const plato2 = {
+    name: "PLATO NUMERO 2",
+    state: true,
+    price: 300,
+    details: "Filete de Pollo salteado con curry rojo y arroz.",
+    img: polloAlCurry,
+};
+const plato3 = {
+    name: "PLATO NUMERO 3",
+    state: true,
+    price: 5000,
+    details: "Filete de Pollo salteado con curry rojo y arroz.",
+    img: polloAlCurry,
+};
 
+/* Estos serían los productos que vendrian desde el back */
 const productsArray = [
     plato1,
+    plato2,
+    plato3,
     plato1,
+    plato2,
+    plato3,
     plato1,
+    plato2,
+    plato3,
     plato1,
-    plato1,
-    plato1,
-    plato1,
-    plato1,
-    plato1,
-    plato1,
+    plato2,
+    plato3,
 ];
+/* ------------------------------------------------------------ */
 
 const MenuCard = ({ object }) => {
+    /* Esto se lo puede pasar a app.jsx para usarlo desde otra pagina */
+    const handleCart = event => {
+        const itemObject = JSON.parse(event.target.value);
+        const cartArray =
+            localStorage.getItem("cart") == undefined
+                ? []
+                : JSON.parse(localStorage.getItem("cart"));
+
+        let found = false;
+        for (let i = 0; i < cartArray.length; i++) {
+            if (cartArray[i].dish.name == itemObject.name) {
+                found = true;
+                cartArray[i].amount++;
+                localStorage.setItem("cart", JSON.stringify(cartArray));
+
+                break;
+            }
+        }
+        if (!found) {
+            const updatedArray = [
+                ...cartArray,
+                { dish: itemObject, amount: 1 },
+            ];
+            localStorage.setItem("cart", JSON.stringify(updatedArray));
+            localStorage.setItem("cart", JSON.stringify(updatedArray));
+            console.log(updatedArray);
+        }
+    };
+
     return (
         <article className="menuCard">
             <figure>
@@ -36,7 +84,15 @@ const MenuCard = ({ object }) => {
                 />
                 <figcaption className="menuCardTitle">{object.name}</figcaption>
                 <p className="menuCardDescription">{object.desc}</p>
-                <button className="menuCardBtn">Agregar al Carrito</button>
+                <button
+                    value={JSON.stringify(object)}
+                    className="menuCardBtn"
+                    onClick={e => {
+                        handleCart(e);
+                    }}
+                >
+                    Agregar al Carrito
+                </button>
             </figure>
         </article>
     );
@@ -48,6 +104,7 @@ const Home = () => {
         menuState == "" ? setMenuState("active") : setMenuState("");
     };
 
+    let nextId = 0;
     return (
         <main>
             <section className="homeBanner">
@@ -128,9 +185,9 @@ const Home = () => {
                 <h3 className="homeMainHeader">Nuestro menú</h3>
                 <h2 className="homeMainTitle">PLATOS POPULARES</h2>
                 <div className="homeMenuCardContainer">
-                    <MenuCard object={plato1} />
-                    <MenuCard object={plato1} />
-                    <MenuCard object={plato1} />
+                    <MenuCard object={productsArray[0]} />
+                    <MenuCard object={productsArray[1]} />
+                    <MenuCard object={productsArray[2]} />
                 </div>
                 <button
                     className={
@@ -150,7 +207,7 @@ const Home = () => {
                     }
                 >
                     {productsArray.map(product => {
-                        return <MenuCard object={product} key={product.name} />;
+                        return <MenuCard object={product} key={nextId++} />;
                     })}
                 </div>
             </section>

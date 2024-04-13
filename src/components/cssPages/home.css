@@ -700,7 +700,7 @@
     }
 }
 
-@media all and (min-width: 1025px) and (max-width: 1440px) {
+@media all and (min-width: 1025px) and (max-width: 1600px) {
     .homeBanner {
         padding-left: 7rem;
     }
