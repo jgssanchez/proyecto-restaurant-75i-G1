@@ -1,51 +1,49 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import "../cssPages/loginCss.css";
+import clienteAxios from "../../utils/clienteAxios";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState('');
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+  const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    
-    let isValid = true;
-    setEmailError('');
-    setPasswordError('');
 
-    if (!email) {
-      setEmailError('Por favor, ingresa tu correo electrónico.');
-      isValid = false;
+    if (!email || !regexEmail.test(email)) {
+      setError("Por favor, ingresa un correo electrónico válido.");
+      return
     }
 
     if (!password) {
-      setPasswordError('Por favor, ingresa tu contraseña.');
-      isValid = false;
+      setError("Por favor, ingresa tu contraseña.");
+      return
     }
-
-    if (isValid) {
-
-      console.log('Email:', email);
-      console.log('Password:', password);
-     
+    
+    try {
+      await clienteAxios.post('/login', {email, password})
+      .then(res => {
+        setError('')
+        setEmail('')
+        setPassword('')
+        alert('Bienvenido')
+        setTimeout(()=>{
+          navigate("/")
+        }, 2000)
+      })
+    } catch (error) {
+      alert(error.message)
     }
   };
 
   return (
     <div className="fullcontent">
-      <Container className='container'>
+      <Container className="container">
         <Row className="headings">
           <Col>
             <h1>Bienvenido a Lotus Fusion</h1>
@@ -63,31 +61,45 @@ const Login = () => {
           </Col>
         </Row>
         <div className="d-flex justify-content-center align-items-center vh-100">
-        <div style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)', padding: '20px', borderRadius: '10px' }}>
-        <h2 className="mb-4">Registro</h2>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group controlId="formName">
-            <Form.Label>Nombre</Form.Label>
-            <Form.Control type="text" placeholder="Ingresa tu nombre" name="name" value={formData.name} onChange={handleChange} />
-          </Form.Group>
+          <div
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+              padding: "20px",
+              borderRadius: "10px",
+            }}
+          >
+            <h2 className="mb-4">Iniciar Sesión</h2>
+            {error && <p className="text-danger text-center">{error}</p>}
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="formEmail">
+                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Ingresa tu correo electrónico"
+                  name="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formEmail">
-            <Form.Label>Correo electrónico</Form.Label>
-            <Form.Control type="email" placeholder="Ingresa tu correo electrónico" name="email" value={formData.email} onChange={handleChange} />
-          </Form.Group>
+              <Form.Group controlId="formPassword">
+                <Form.Label>Contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Ingresa tu contraseña"
+                  name="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
 
-          <Form.Group controlId="formPassword">
-            <Form.Label>Contraseña</Form.Label>
-            <Form.Control type="password" placeholder="Ingresa tu contraseña" name="password" value={formData.password} onChange={handleChange} />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">
-            Registrarse
-          </Button>
-        </Form>
-      </div>
-    </div>
-    </Container>
+              <Button variant="primary" type="submit">
+                Ingresar
+              </Button>
+            </Form>
+          </div>
+        </div>
+      </Container>
     </div>
   );
 };
