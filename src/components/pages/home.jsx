@@ -51,13 +51,14 @@ const MenuCard = ({ object }) => {
             localStorage.getItem("cart") == undefined
                 ? []
                 : JSON.parse(localStorage.getItem("cart"));
-        console.log(cartArray);
 
         let found = false;
         for (let i = 0; i < cartArray.length; i++) {
-            if (cartArray[i].dish === itemObject) {
+            if (cartArray[i].dish.name == itemObject.name) {
                 found = true;
-                element.amount++;
+                cartArray[i].amount++;
+                localStorage.setItem("cart", JSON.stringify(cartArray));
+
                 break;
             }
         }
@@ -67,16 +68,9 @@ const MenuCard = ({ object }) => {
                 { dish: itemObject, amount: 1 },
             ];
             localStorage.setItem("cart", JSON.stringify(updatedArray));
+            localStorage.setItem("cart", JSON.stringify(updatedArray));
+            console.log(updatedArray);
         }
-
-        /* const previousArray =
-            localStorage.getItem("cart") == undefined
-                ? []
-                : localStorage.getItem("cart");
-        localStorage.setItem(
-            "cart",
-            JSON.stringify([...previousArray, { dish: object, amount: 1 }])
-        ); */
     };
 
     return (
