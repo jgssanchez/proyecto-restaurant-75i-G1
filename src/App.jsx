@@ -5,6 +5,7 @@ import Home from "./components/pages/home";
 import Login from "./components/pages/login";
 import Register from "./components/pages/register";
 import NotFound from "./components/pages/notFound";
+import PaginaCarrito from "./components/pages/carrito";
 
 import Footer from "./components/common/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,6 +25,10 @@ function App() {
                     <Route
                         path="/register"
                         element={<Register></Register>}
+                    ></Route>
+                    <Route
+                        path="/carrito"
+                        element={<PaginaCarrito></PaginaCarrito>}
                     ></Route>
                 </Routes>
                 <Footer />
