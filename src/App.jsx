@@ -9,15 +9,17 @@ import Menu from "./components/common/Menu";
 import Footer from "./components/common/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./components/pages/Dashboard";
+import Usuarios from "./components/pages/Usuarios";
 
 function App() {
   return (
     <>
     <BrowserRouter>
-    <Menu></Menu>
+   {/*<Menu></Menu> */} 
       <Routes>
         <Route path="/home" element={<Home></Home>}></Route>
         <Route path="/admin" element={<Dashboard></Dashboard>}></Route>
+        <Route path="/usuarios" element={<Usuarios></Usuarios>}></Route>
         <Route exact path="/login" element={<Login></Login>}></Route>
         <Route path="*" element={<NotFound></NotFound>}></Route>
         <Route path="/register" element={<Register></Register>}></Route>
