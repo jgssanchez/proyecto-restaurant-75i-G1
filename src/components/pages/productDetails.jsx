@@ -2,41 +2,6 @@ import { useState, useEffect } from "react";
 import deleteImg from "../../assets/delete.svg";
 import arrowImg from "../../assets/arrow-forward.svg";
 import "../cssPages/carrito.css";
-import cartExample from "../../assets/cartExample.png";
-
-/* Eliminar el codigo comentado cuando se agreguen productos al carrito desde otras paginas */
-const plato = {
-    name: "1.POLLO AL CURRY ROJO",
-    state: true,
-    price: 5600,
-    details: "Filete de Pollo salteado con curry rojo y arroz.",
-    img: cartExample,
-};
-const plato2 = {
-    name: "1.caca con carne",
-    state: true,
-    price: 300,
-    details: "Filete de Pollo salteado con curry rojo y arroz.",
-    img: cartExample,
-};
-const plato3 = {
-    name: "1.carne AL CURRY ROJO",
-    state: true,
-    price: 5000,
-    details: "Filete de Pollo salteado con curry rojo y arroz.",
-    img: cartExample,
-};
-
-/* Esto tiene que venir desde app.jsx, cuando se agregue un item al carrito desde otra pagina */
-localStorage.setItem(
-    "cart",
-    JSON.stringify([
-        { dish: plato, amount: 1 },
-        { dish: plato3, amount: 3 },
-        { dish: plato2, amount: 5 },
-    ])
-);
-/* ----------------------------------------------------------------------------- */
 
 const ProductDetails = () => {
     const [arrayCarrito, setArrayCarrito] = useState(
