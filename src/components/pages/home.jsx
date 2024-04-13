@@ -1,4 +1,4 @@
-import "../css/home.css";
+import "../cssPages/home.css";
 import { useState } from "react";
 import homeBannerImg from "../../assets/homeBannerImg.jpg";
 import homeAboutUsImg from "../../assets/homeAboutUsImg.png";
