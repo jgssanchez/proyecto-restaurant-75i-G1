@@ -28,4 +28,12 @@
     list-style: none;
     margin-bottom: 10px;
   }
+  .logo-container {
+    padding: 0;
+  }
   
+  .footer-logo {
+    max-width:250px; 
+    opacity: 1; 
+  
+  }
