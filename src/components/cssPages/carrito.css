@@ -59,6 +59,14 @@ html {
     height: 100%;
 }
 
+.pagCarritoTotal {
+    width: 100%;
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
 /* ------------- */
 .pagCarritoItemShowAmount {
     font-weight: 500;
@@ -100,6 +108,12 @@ html {
 .itemCarritoLess {
     font-size: 2rem;
     border-radius: 10px 0 0 10px;
+}
+
+.itemCarritoLess.disabled {
+    font-size: 2rem;
+    border-radius: 10px 0 0 10px;
+    color: #bdbdbd;
 }
 
 .itemCarritoAmount {

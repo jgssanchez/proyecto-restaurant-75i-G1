@@ -1,11 +1,49 @@
+import { useState, useEffect } from "react";
 import deleteImg from "../../assets/delete.svg";
 import arrowImg from "../../assets/arrow-forward.svg";
-import cartExample from "../../assets/cartExample.png";
 import "../cssPages/carrito.css";
+import cartExample from "../../assets/cartExample.png";
+
+/* Eliminar el codigo comentado cuando se agreguen productos al carrito desde otras paginas */
+const plato = {
+    name: "1.POLLO AL CURRY ROJO",
+    state: true,
+    price: 5600,
+    details: "Filete de Pollo salteado con curry rojo y arroz.",
+    img: cartExample,
+};
+const plato2 = {
+    name: "1.caca con carne",
+    state: true,
+    price: 4000,
+    details: "Filete de Pollo salteado con curry rojo y arroz.",
+    img: cartExample,
+};
+const plato3 = {
+    name: "1.carne AL CURRY ROJO",
+    state: true,
+    price: 5000,
+    details: "Filete de Pollo salteado con curry rojo y arroz.",
+    img: cartExample,
+};
+
+/* Esto tiene que venir desde app.jsx */
+localStorage.setItem(
+    "cart",
+    JSON.stringify([
+        { dish: plato, amount: 1 },
+        { dish: plato3, amount: 3 },
+    ])
+);
 
 const PaginaCarrito = () => {
-    localStorage.setItem("cart", []);
-    const arrayItemsCarrito = localStorage.getItem("cart");
+    const [arrayCarrito, setArrayCarrito] = useState(
+        JSON.parse(localStorage.getItem("cart"))
+    );
+
+    console.log(arrayCarrito);
+
+    const [total, setTotal] = useState(0);
 
     return (
         <main className="pagCarrito">
@@ -13,8 +51,7 @@ const PaginaCarrito = () => {
                 <h1 className="pagCarritoTitle">CARRITO DE COMPRAS</h1>
                 <table className="pagCarritoTable">
                     <tbody>
-                        {arrayItemsCarrito == null ||
-                        arrayItemsCarrito == [] ? (
+                        {arrayCarrito == null || arrayCarrito.length === 0 ? (
                             <tr className="pagCarritoItem">
                                 <th className="pagCarritoItemName">
                                     Aún no hay productos en el carrito, ¡Agrega
@@ -22,48 +59,105 @@ const PaginaCarrito = () => {
                                 </th>
                             </tr>
                         ) : (
-                            <tr className="pagCarritoItem">
-                                <th className="pagCarritoItemShowAmount">X1</th>
-                                <th className="pagCarritoItemImg">
-                                    <img src={cartExample} alt="#" />
-                                </th>
-                                <th className="pagCarritoItemName">
-                                    1. PAD TAILANDÉS
-                                </th>
-                                <th className="pagCarritoItemEditAmount">
-                                    <button className="itemCarritoEditAmoutChild itemCarritoLess">
-                                        -
-                                    </button>
-                                    <div className="itemCarritoEditAmoutChild itemCarritoAmount">
-                                        1
-                                    </div>
-                                    <button className="itemCarritoEditAmoutChild itemCarritoMore">
-                                        +
-                                    </button>
-                                </th>
-                                <th className="pagCarritoItemPrice">$ 5.200</th>
-                                <th className="pagCarritoItemDelete">
-                                    <button className="itemCarritoDelete">
-                                        <img
-                                            className="itemCarritoDeleteImg"
-                                            src={deleteImg}
-                                        />
-                                    </button>
-                                </th>
-                            </tr>
+                            arrayCarrito.map(item => {
+                                return (
+                                    <CartItem
+                                        key={item.dish.name}
+                                        item={item}
+                                        setArray={setArrayCarrito}
+                                        array={arrayCarrito}
+                                    ></CartItem>
+                                );
+                            })
                         )}
                     </tbody>
                 </table>
+                <p className="pagCarritoTotal">{"Total: $ " + total}</p>
             </div>
-            <button className="pagCarritoPagarBtn">
-                Check-Out y Pago{" "}
-                <img
-                    className="pagCarritoPagarBtnFlecha"
-                    src={arrowImg}
-                    alt="ir al pago"
-                />
-            </button>
+            {arrayCarrito == null || arrayCarrito.length === 0 ? (
+                ""
+            ) : (
+                <button className="pagCarritoPagarBtn">
+                    Check-Out y Pago{" "}
+                    <img
+                        className="pagCarritoPagarBtnFlecha"
+                        src={arrowImg}
+                        alt="ir al pago"
+                    />
+                </button>
+            )}
         </main>
+    );
+};
+
+const CartItem = ({ item, array, setArray }) => {
+    const [amount, setAmount] = useState(item.amount);
+    const handleMoreAmount = () => {
+        setAmount(amount + 1);
+        item.amount = amount + 1;
+    };
+    const handleLessAmount = () => {
+        setAmount(amount - 1);
+        item.amount = amount - 1;
+    };
+    const handleDeletion = name => {
+        setArray(array.filter(product => product.name !== name));
+    };
+    /* Si el producto está repetido en el array, se transforma en "amount" */
+    useEffect(() => {
+        const repetitions = array.filter(
+            product => product.name === item.name
+        ).length;
+        setAmount(repetitions);
+    }, [array, item]);
+    /* si el amount cambia, cambia el precio total del carrito */
+    const handleTotalUp = () => {
+        setTotal(total);
+    };
+
+    return (
+        <tr className="pagCarritoItem">
+            <th className="pagCarritoItemShowAmount">X {item.amount}</th>
+            <th className="pagCarritoItemImg">
+                <img src={item.dish.img} alt="#" />
+            </th>
+            <th className="pagCarritoItemName">{item.dish.name}</th>
+            <th className="pagCarritoItemEditAmount">
+                <button
+                    className={
+                        amount <= 1
+                            ? "itemCarritoEditAmoutChild itemCarritoLess disabled"
+                            : "itemCarritoEditAmoutChild itemCarritoLess"
+                    }
+                    onClick={handleLessAmount}
+                    disabled={amount <= 1 ? true : false}
+                >
+                    -
+                </button>
+                <div className="itemCarritoEditAmoutChild itemCarritoAmount">
+                    {item.amount}
+                </div>
+                <button
+                    className="itemCarritoEditAmoutChild itemCarritoMore"
+                    onClick={handleMoreAmount}
+                >
+                    +
+                </button>
+            </th>
+            <th className="pagCarritoItemPrice">
+                {"$" + " " + item.dish.price * amount}
+            </th>
+            <th className="pagCarritoItemDelete">
+                <button
+                    className="itemCarritoDelete"
+                    onClick={() => {
+                        handleDeletion(item.dish.name);
+                    }}
+                >
+                    <img className="itemCarritoDeleteImg" src={deleteImg} />
+                </button>
+            </th>
+        </tr>
     );
 };
 
