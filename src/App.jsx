@@ -9,11 +9,13 @@ import PaginaCarrito from "./components/pages/carrito";
 
 import Footer from "./components/common/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/common/layout/layout";
 
 function App() {
     return (
         <>
             <BrowserRouter>
+            <Layout>
                 <Routes>
                     <Route path="/" element={<Home></Home>}></Route>
                     <Route
@@ -31,7 +33,7 @@ function App() {
                         element={<PaginaCarrito></PaginaCarrito>}
                     ></Route>
                 </Routes>
-                <Footer />
+            </Layout>
             </BrowserRouter>
         </>
     );
