@@ -15,7 +15,7 @@ const plato = {
 const plato2 = {
     name: "1.caca con carne",
     state: true,
-    price: 4000,
+    price: 300,
     details: "Filete de Pollo salteado con curry rojo y arroz.",
     img: cartExample,
 };
@@ -27,23 +27,35 @@ const plato3 = {
     img: cartExample,
 };
 
-/* Esto tiene que venir desde app.jsx */
+/* Esto tiene que venir desde app.jsx, cuando se agregue un item al carrito desde otra pagina */
 localStorage.setItem(
     "cart",
     JSON.stringify([
         { dish: plato, amount: 1 },
         { dish: plato3, amount: 3 },
+        { dish: plato2, amount: 5 },
     ])
 );
+/* ----------------------------------------------------------------------------- */
 
 const PaginaCarrito = () => {
     const [arrayCarrito, setArrayCarrito] = useState(
         JSON.parse(localStorage.getItem("cart"))
     );
 
-    console.log(arrayCarrito);
-
     const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        const totalPrice = arrayCarrito.map(element => {
+            const productPrice = element.dish.price * element.amount;
+            return productPrice;
+        });
+        let suma = 0;
+        totalPrice.forEach(element => {
+            suma += element;
+        });
+        setTotal(suma);
+    }, [arrayCarrito]);
 
     return (
         <main className="pagCarrito">
@@ -92,28 +104,45 @@ const PaginaCarrito = () => {
 
 const CartItem = ({ item, array, setArray }) => {
     const [amount, setAmount] = useState(item.amount);
+
     const handleMoreAmount = () => {
-        setAmount(amount + 1);
-        item.amount = amount + 1;
+        const newAmount = amount + 1;
+        setAmount(newAmount);
+        const updatedItem = { ...item, amount: newAmount }; // Crea una nueva instancia de 'item' con la cantidad actualizada
+        updateItemInArray(updatedItem); // Actualiza el estado 'array' con el 'item' actualizado
     };
+
     const handleLessAmount = () => {
-        setAmount(amount - 1);
-        item.amount = amount - 1;
+        if (amount > 1) {
+            const newAmount = amount - 1;
+            setAmount(newAmount);
+            const updatedItem = { ...item, amount: newAmount }; // Crea una nueva instancia de 'item' con la cantidad actualizada
+            updateItemInArray(updatedItem); // Actualiza el estado 'array' con el 'item' actualizado
+        }
     };
+
     const handleDeletion = name => {
-        setArray(array.filter(product => product.name !== name));
+        const updatedArray = array.filter(
+            product => product.dish.name !== name
+        );
+        setArray(updatedArray);
+        localStorage.setItem("cart", JSON.stringify(updatedArray));
     };
-    /* Si el producto está repetido en el array, se transforma en "amount" */
+
+    const updateItemInArray = updatedItem => {
+        const updatedArray = array.map(product => {
+            if (product.dish.name === updatedItem.dish.name) {
+                return updatedItem; // Reemplazar el 'item' actualizado en el array
+            }
+            return product;
+        });
+        setArray(updatedArray);
+        localStorage.setItem("cart", JSON.stringify(updatedArray));
+    };
+
     useEffect(() => {
-        const repetitions = array.filter(
-            product => product.name === item.name
-        ).length;
-        setAmount(repetitions);
-    }, [array, item]);
-    /* si el amount cambia, cambia el precio total del carrito */
-    const handleTotalUp = () => {
-        setTotal(total);
-    };
+        localStorage.setItem("cart", JSON.stringify(array));
+    }, [array]);
 
     return (
         <tr className="pagCarritoItem">
