@@ -45,6 +45,7 @@ const productsArray = [
 /* ------------------------------------------------------------ */
 
 const MenuCard = ({ object }) => {
+    /* Esto se lo puede pasar a app.jsx para usarlo desde otra pagina */
     const handleCart = event => {
         const itemObject = JSON.parse(event.target.value);
         const cartArray =
