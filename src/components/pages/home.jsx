@@ -7,7 +7,8 @@ import padTailandes from "../../assets/padTailandes.png";
 import polloYAnacardos from "../../assets/polloYAnacardos.png";
 import { HashLink } from "react-router-hash-link";
 
-/*-------------- Eliminar cuando se una la logica --------------*/
+/*-------------- Eliminar cuando se una el backend  --------------*/
+/* La pagina de inicio debe recibir un array de productos y eso es todo lo necesario para que funcione */
 const plato1 = {
     name: "POLLO AL CURRY ROJO",
     state: true,
