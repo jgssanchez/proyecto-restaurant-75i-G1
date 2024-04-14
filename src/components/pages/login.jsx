@@ -34,6 +34,7 @@ const Login = () => {
         alert('Bienvenido')
         setTimeout(()=>{
           navigate("/")
+          window.location.reload()
         }, 2000)
       })
     } catch (error) {
@@ -42,28 +43,13 @@ const Login = () => {
   };
 
   return (
-    <div className="fullcontent">
+    <div className="fullcontent align-content-center">
       <Container className="container">
-        <Row className="headings">
-          <Col>
-            <h1>Bienvenido a Lotus Fusion</h1>
-            <h2>
-              ¡Descubre una fusión de sabores únicos y una experiencia
-              gastronómica excepcional en nuestro restaurante!
-            </h2>
-            <h2>
-              {" "}
-              En Lotus Fusion, nos enorgullece ofrecer platos cuidadosamente
-              preparados que combinan la frescura de los ingredientes con la
-              creatividad en la cocina. Nuestro objetivo es brindarte una comida
-              deliciosa y satisfactoria en un ambiente acogedor y relajante.
-            </h2>
-          </Col>
-        </Row>
-        <div className="d-flex justify-content-center align-items-center vh-100">
-          <div
+        
+        <div className="formbox d-flex justify-content-center align-items-center vh-100">
+          <div 
             style={{
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
+              color:"white",
               padding: "20px",
               borderRadius: "10px",
             }}
@@ -93,7 +79,7 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Button variant="primary" type="submit">
+              <Button className="btn my-2 w-100" variant="warning" type="submit">
                 Ingresar
               </Button>
             </Form>
