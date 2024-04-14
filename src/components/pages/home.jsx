@@ -3,28 +3,31 @@ import { useState } from "react";
 import homeBannerImg from "../../assets/homeBannerImg.jpg";
 import homeAboutUsImg from "../../assets/homeAboutUsImg.png";
 import polloAlCurry from "../../assets/polloAlCurry.png";
+import padTailandes from "../../assets/padTailandes.png";
+import polloYAnacardos from "../../assets/polloYAnacardos.png";
+import { HashLink } from "react-router-hash-link";
 
 /*-------------- Eliminar cuando se una la logica --------------*/
 const plato1 = {
-    name: "PLATO NUMERO 1",
+    name: "POLLO AL CURRY ROJO",
     state: true,
     price: 5600,
     details: "Filete de Pollo salteado con curry rojo y arroz.",
     img: polloAlCurry,
 };
 const plato2 = {
-    name: "PLATO NUMERO 2",
+    name: "PAD TAILANDES",
     state: true,
     price: 300,
     details: "Filete de Pollo salteado con curry rojo y arroz.",
-    img: polloAlCurry,
+    img: padTailandes,
 };
 const plato3 = {
-    name: "PLATO NUMERO 3",
+    name: "POLLO Y ANACARDOS",
     state: true,
     price: 5000,
     details: "Filete de Pollo salteado con curry rojo y arroz.",
-    img: polloAlCurry,
+    img: polloYAnacardos,
 };
 
 /* Estos serían los productos que vendrian desde el back */
@@ -32,19 +35,19 @@ const productsArray = [
     plato1,
     plato2,
     plato3,
-    plato1,
     plato2,
-    plato3,
     plato1,
-    plato2,
-    plato3,
     plato1,
-    plato2,
     plato3,
+    plato2,
+    plato1,
+    plato3,
+    plato3,
+    plato2,
 ];
 /* ------------------------------------------------------------ */
 
-const MenuCard = ({ object }) => {
+const MenuCard = ({ object, setObjectPage }) => {
     /* Esto se lo puede pasar a app.jsx para usarlo desde otra pagina */
     const handleCart = event => {
         const itemObject = JSON.parse(event.target.value);
@@ -70,35 +73,42 @@ const MenuCard = ({ object }) => {
             ];
             localStorage.setItem("cart", JSON.stringify(updatedArray));
             localStorage.setItem("cart", JSON.stringify(updatedArray));
-            console.log(updatedArray);
         }
     };
 
     return (
         <article className="menuCard">
-            <figure>
-                <img
-                    className="menuCardImg"
-                    src={object.img}
-                    alt={object.name}
-                />
-                <figcaption className="menuCardTitle">{object.name}</figcaption>
-                <p className="menuCardDescription">{object.desc}</p>
-                <button
-                    value={JSON.stringify(object)}
-                    className="menuCardBtn"
-                    onClick={e => {
-                        handleCart(e);
-                    }}
-                >
-                    Agregar al Carrito
-                </button>
-            </figure>
+            <HashLink
+                to={"/details#detailsPage"}
+                className="menuCardLink"
+                onClick={() => setObjectPage(object)}
+            >
+                <figure>
+                    <img
+                        className="menuCardImg"
+                        src={object.img}
+                        alt={object.name}
+                    />
+                    <figcaption className="menuCardTitle">
+                        {object.name}
+                    </figcaption>
+                    <p className="menuCardDescription">{object.details}</p>
+                </figure>
+            </HashLink>
+            <button
+                value={JSON.stringify(object)}
+                className="menuCardBtn"
+                onClick={e => {
+                    handleCart(e);
+                }}
+            >
+                Agregar al Carrito
+            </button>
         </article>
     );
 };
 
-const Home = () => {
+const Home = ({ setObjectPage }) => {
     const [menuState, setMenuState] = useState("");
     const handleMenu = () => {
         menuState == "" ? setMenuState("active") : setMenuState("");
@@ -185,9 +195,18 @@ const Home = () => {
                 <h3 className="homeMainHeader">Nuestro menú</h3>
                 <h2 className="homeMainTitle">PLATOS POPULARES</h2>
                 <div className="homeMenuCardContainer">
-                    <MenuCard object={productsArray[0]} />
-                    <MenuCard object={productsArray[1]} />
-                    <MenuCard object={productsArray[2]} />
+                    <MenuCard
+                        object={productsArray[0]}
+                        setObjectPage={setObjectPage}
+                    />
+                    <MenuCard
+                        object={productsArray[1]}
+                        setObjectPage={setObjectPage}
+                    />
+                    <MenuCard
+                        object={productsArray[2]}
+                        setObjectPage={setObjectPage}
+                    />
                 </div>
                 <button
                     className={
@@ -207,7 +226,13 @@ const Home = () => {
                     }
                 >
                     {productsArray.map(product => {
-                        return <MenuCard object={product} key={nextId++} />;
+                        return (
+                            <MenuCard
+                                object={product}
+                                key={nextId++}
+                                setObjectPage={setObjectPage}
+                            />
+                        );
                     })}
                 </div>
             </section>

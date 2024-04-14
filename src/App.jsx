@@ -10,13 +10,19 @@ import PaginaCarrito from "./components/pages/carrito";
 
 import Footer from "./components/common/footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
+    const [objectPage, setObjectPage] = useState({});
+
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home></Home>}></Route>
+                    <Route
+                        path="/"
+                        element={<Home setObjectPage={setObjectPage}></Home>}
+                    ></Route>
                     <Route
                         exact
                         path="/login"
@@ -29,7 +35,11 @@ function App() {
                     ></Route>
                     <Route
                         path="/details"
-                        element={<ProductDetails></ProductDetails>}
+                        element={
+                            <ProductDetails
+                                objectPage={objectPage}
+                            ></ProductDetails>
+                        }
                     ></Route>
                     <Route
                         path="/carrito"
