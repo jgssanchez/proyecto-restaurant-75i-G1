@@ -48,35 +48,6 @@ const productsArray = [
 /* ------------------------------------------------------------ */
 
 const MenuCard = ({ object, setObjectPage, handleCart }) => {
-    /* Esto se lo puede pasar a app.jsx para usarlo desde otra pagina */
-    /* const handleCart = event => {
-        const itemObject = JSON.parse(event.target.value);
-        const cartArray =
-            localStorage.getItem("cart") == undefined
-                ? []
-                : JSON.parse(localStorage.getItem("cart"));
-
-        let found = false;
-        for (let i = 0; i < cartArray.length; i++) {
-            if (cartArray[i].dish.name == itemObject.name) {
-                found = true;
-                cartArray[i].amount++;
-                localStorage.setItem("cart", JSON.stringify(cartArray));
-
-                break;
-            }
-        }
-        if (!found) {
-            const updatedArray = [
-                ...cartArray,
-                { dish: itemObject, amount: 1 },
-            ];
-            localStorage.setItem("cart", JSON.stringify(updatedArray));
-            localStorage.setItem("cart", JSON.stringify(updatedArray));
-        }
-    }; */
-    console.log(handleCart);
-
     return (
         <article className="menuCard">
             <HashLink
@@ -112,7 +83,7 @@ const MenuCard = ({ object, setObjectPage, handleCart }) => {
     );
 };
 
-const Home = ({ setObjectPage }) => {
+const Home = ({ setObjectPage, handleCart }) => {
     const [menuState, setMenuState] = useState("");
     const handleMenu = () => {
         menuState == "" ? setMenuState("active") : setMenuState("");
@@ -202,14 +173,17 @@ const Home = ({ setObjectPage }) => {
                     <MenuCard
                         object={productsArray[0]}
                         setObjectPage={setObjectPage}
+                        handleCart={handleCart}
                     />
                     <MenuCard
                         object={productsArray[1]}
                         setObjectPage={setObjectPage}
+                        handleCart={handleCart}
                     />
                     <MenuCard
                         object={productsArray[2]}
                         setObjectPage={setObjectPage}
+                        handleCart={handleCart}
                     />
                 </div>
                 <button
@@ -235,6 +209,7 @@ const Home = ({ setObjectPage }) => {
                                 object={product}
                                 key={nextId++}
                                 setObjectPage={setObjectPage}
+                                handleCart={handleCart}
                             />
                         );
                     })}
