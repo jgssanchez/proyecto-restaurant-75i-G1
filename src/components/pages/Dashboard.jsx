@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Navbar, Col, Button, Offcanvas, Nav, Image } from "react-bootstrap";
-import logo from "../../assets/logo-sinbg.png";
+import usuario from "../../assets/usuario.png";
+import logo from "../../assets/logo-sinbg.png"
 import { HiOutlineMenuAlt1, HiOutlineMenu } from "react-icons/hi";
 import { FaUsers } from "react-icons/fa";
 import { MdOutlineRequestPage, MdOutlineRestaurantMenu,MdOutlineLogout } from "react-icons/md";
@@ -37,34 +38,33 @@ const Dashboard = () => {
           </Container>
         </Navbar>
 
-        <Offcanvas show={showNavbar} onHide={handleCloseNavbar} placement="end">
+        <Offcanvas show={showNavbar} onHide={handleCloseNavbar} placement="end" className="bg-light">
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Navbar</Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            <Nav className="flex-column">
-              <Nav.Link href="#">Home</Nav.Link>
-              <Nav.Link href="#">About</Nav.Link>
-              <Nav.Link href="#">Contact</Nav.Link>
+            <Nav variant="tabs" className="flex-column mt-4 text-center">
+              <Nav.Link href="/inicio">Inicio</Nav.Link>
+              <Nav.Link href="/nosotros">Nosotros</Nav.Link>
+              <Nav.Link href="#">Productos</Nav.Link>
             </Nav>
           </Offcanvas.Body>
         </Offcanvas>
 
           
-            <Offcanvas show={openOffcanvas} bg="dark" onHide={toggleOffcanvas} placement="start" backdrop={false}
+            <Offcanvas show={openOffcanvas}  onHide={toggleOffcanvas} placement="start" backdrop={false}
         keyboard={false}
         scrollLock={false} className="offcanva-dashboard">
               <Offcanvas.Header closeButton className="btn-dashboard">
                 <div className="d-flex flex-column">
                 <Offcanvas.Title className="col-12"> Bienvenido admin</Offcanvas.Title>
-                <Image src={logo} className="col-12 mx-auto d-block mt-4" roundedCircle></Image>
-                <p className="col-12 text-center mt-4">administrador@gmail.com</p>
+                <Image src={usuario} height="100" className="col-6 mt-4" style={{marginLeft: "110px"}}roundedCircle></Image>
+                <p className="col-12 text-center ms-5 mt-4">administrador@gmail.com</p>
                 </div>
                 
                 </Offcanvas.Header>
                 <Offcanvas.Body>
                
-                <Nav className="mt-5 flex-column text-center align-items-center">
+                <Nav className="mt-4 flex-column text-center align-items-center">
                   <Nav.Link href="/usuarios">
                     <FaUsers />
                     Usuarios
@@ -87,7 +87,7 @@ const Dashboard = () => {
             </Offcanvas>
         
             <Container style={{ marginLeft: openOffcanvas ? "250px" : "0" } } className="mt-5">
-        {/* Contenido adicional */}
+       
         <Col>
           <div className="p-3">
             <h5>Otro contenido</h5>

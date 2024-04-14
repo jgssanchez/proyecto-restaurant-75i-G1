@@ -16,8 +16,16 @@
  .col-12.offcanvas-title.h5 {
    margin-left: 100px;
 }
-.offcanvas-header .btn-close {
 
+.offcanvas .nav-tabs .nav-link{
+--bs-nav-link-color: #232222;
+--bs-nav-tabs-link-active-color: white;
+    --bs-nav-tabs-link-active-bg: #fdc500;
+}
+
+.offcanva-dashboard .btn-close {
+margin-bottom: 93px;
+ --bs-btn-close-color: #fdc500
 }
 .offcanva-dashboard.offcanvas.offcanvas-start.show{
    background-color: #232222;
