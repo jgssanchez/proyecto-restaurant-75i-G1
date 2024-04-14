@@ -14,7 +14,9 @@ const ProductDetails = ({ objectPage, handleCart }) => {
                 </div>
                 <div className="detailsTextContainer">
                     <h1 className="detailsProductName">{objectPage.name}</h1>
-                    <p className="detailsProductDesc">{objectPage.details}</p>
+                    <p className="detailsProductDesc">
+                        {"- " + objectPage.details}
+                    </p>
                     <h3 className="detailsProductState">
                         {objectPage.state
                             ? "Disponible"
