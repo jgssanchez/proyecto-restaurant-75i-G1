@@ -87,6 +87,15 @@ html {
     font-size: 1.5rem;
     border-radius: 30px;
     margin: 0rem 0 0 auto;
+    transition: 0.1s;
+}
+.detailsProductAddToCart:hover {
+    color: #fdf9f3;
+    background-color: #fdf9f334;
+}
+.detailsProductAddToCart:active {
+    color: #fdf9f3;
+    background-color: #fdf9f361;
 }
 
 /* --------------------- */

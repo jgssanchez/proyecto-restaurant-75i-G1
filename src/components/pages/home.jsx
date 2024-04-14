@@ -47,9 +47,9 @@ const productsArray = [
 ];
 /* ------------------------------------------------------------ */
 
-const MenuCard = ({ object, setObjectPage }) => {
+const MenuCard = ({ object, setObjectPage, handleCart }) => {
     /* Esto se lo puede pasar a app.jsx para usarlo desde otra pagina */
-    const handleCart = event => {
+    /* const handleCart = event => {
         const itemObject = JSON.parse(event.target.value);
         const cartArray =
             localStorage.getItem("cart") == undefined
@@ -74,14 +74,18 @@ const MenuCard = ({ object, setObjectPage }) => {
             localStorage.setItem("cart", JSON.stringify(updatedArray));
             localStorage.setItem("cart", JSON.stringify(updatedArray));
         }
-    };
+    }; */
+    console.log(handleCart);
 
     return (
         <article className="menuCard">
             <HashLink
                 to={"/details#detailsPage"}
                 className="menuCardLink"
-                onClick={() => setObjectPage(object)}
+                onClick={() => {
+                    setObjectPage(object);
+                    localStorage.setItem("objectPage", JSON.stringify(object));
+                }}
             >
                 <figure>
                     <img

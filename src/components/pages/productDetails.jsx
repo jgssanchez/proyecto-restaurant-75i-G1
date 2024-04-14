@@ -2,7 +2,7 @@ import returnArrow from "../../assets/arrow-forward.svg";
 import "../cssPages/details.css";
 import { HashLink } from "react-router-hash-link";
 
-const ProductDetails = ({ objectPage }) => {
+const ProductDetails = ({ objectPage, handleCart }) => {
     return (
         <main className="pagDetails" id="detailsPage">
             <HashLink smooth to="/#mainMenu" className="detailsReturnBtn">
@@ -21,11 +21,19 @@ const ProductDetails = ({ objectPage }) => {
                             : "No se encuentra disponible."}
                     </h3>
                     <h2 className="detailsProductPrice">
-                        {"$ " + objectPage.price}
+                        {objectPage.price ? "$ " + objectPage.price : ""}
                     </h2>
-                    <button className="detailsProductAddToCart">
-                        + Añadir a la Orden
-                    </button>
+                    {objectPage != undefined ? (
+                        <button
+                            value={JSON.stringify(objectPage)}
+                            className="detailsProductAddToCart"
+                            onClick={e => handleCart(e)}
+                        >
+                            + Añadir a la Orden
+                        </button>
+                    ) : (
+                        <p>Por favor vuelva atras e intente nuevamente.</p>
+                    )}
                 </div>
             </section>
         </main>
