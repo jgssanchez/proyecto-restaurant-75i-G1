@@ -124,10 +124,6 @@ const AdminModal = ({ productsArray, setProductsArray }) => {
         setProductImg("");
     };
 
-    useEffect(() => {
-        console.log(productsArray);
-    }, [productsArray]);
-
     return (
         <section className="adminModalContainer">
             <div className="adminModal">
