@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import '../common/footer.css'; 
+import logo from "../../assets/logo.jpeg"
 
 const Footer = () => {
   return (
@@ -9,7 +10,7 @@ const Footer = () => {
       <Container>
         <Row>
           <Col md={3} className="footer-column">
-            <img src="logo.png" alt="Logo" className="footer-logo" />
+            <img src={logo} alt="Logo" className="footer-logo" />
             <p>&copy;  RollingCode Todos los derechos reservados</p>
             <p>Proyecto final</p>
             <p>comisión 75-i Grupo 1</p>

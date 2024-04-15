@@ -1,32 +1,195 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
+import "../cssPages/home.css";
+import { useState } from "react";
+import homeBannerImg from "../../assets/homeBannerImg.jpg";
+import homeAboutUsImg from "../../assets/homeAboutUsImg.png";
+// import polloAlCurry from "../../assets/polloAlCurry.png";
+// import padTailandes from "../../assets/padTailandes.png";
+// import polloYAnacardos from "../../assets/polloYAnacardos.png";
+import { HashLink } from "react-router-hash-link";
+import { useSelector, useDispatch } from "react-redux";
+import { agregarCarrito } from "../../redux/actions/usuarioActions";
+
+const MenuCard = ({ nombre, imagen, detalle, precio, id }) => {
+    const dispatch = useDispatch();
+    const { carrito } = useSelector(state => state.usuario);
+    const productoEnCarrito = carrito.some(producto => producto._id === id);
+
+    const handleCarrito = async id => {
+        dispatch(agregarCarrito(id)).then(res => {
+            if (productoEnCarrito) {
+                alert("Producto quitado del carrito");
+            } else {
+                alert("Producto agregado del carrito");
+            }
+        });
+    };
+
+    return (
+        <article className="menuCard">
+            <HashLink to={`/detalle/${id}`} className="menuCardLink">
+                <figure>
+                    <img className="menuCardImg" src={imagen} alt={imagen} />
+                    <figcaption className="menuCardTitle">{nombre}</figcaption>
+                    <p className="menuCardDescription">{detalle}</p>
+                </figure>
+                <p className="menuCardPrice">$ {precio}</p>
+            </HashLink>
+            {productoEnCarrito ? (
+                <button
+                    onClick={() => handleCarrito(id)}
+                    className="menuCardBtn"
+                >
+                    Quitar del Carrito
+                </button>
+            ) : (
+                <button
+                    onClick={() => handleCarrito(id)}
+                    className="menuCardBtn"
+                >
+                    Agregar al Carrito
+                </button>
+            )}
+        </article>
+    );
+};
 
 const Home = () => {
-  return (
-    <Container className="mainSection">
-      <Row>
-        <Col>
-          <h1>Bienvenido a nuestra tienda</h1>
-          <Button variant="primary">Iniciar Sesión</Button>{" "}
-          <Button variant="secondary">Registrarse</Button>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perspiciatis nulla omnis expedita tempora, eos eveniet mollitia a
-            animi sunt harum minima nobis sed culpa velit repudiandae in nemo
-            voluptates voluptatem? Officia, eum ipsa praesentium pariatur libero
-            natus ab reiciendis perspiciatis atque eos odio vitae iure adipisci
-            beatae magnam aut quidem ea molestiae nam ducimus quis! Corporis
-            magnam fugiat deserunt. Qui totam, explicabo labore alias odio
-            perspiciatis adipisci deleniti officia debitis cupiditate neque
-            itaque dolorem tenetur sapiente ex dicta, doloremque saepe autem
-            cumque eos inventore dolores! Unde, quas earum! Deleniti ad ipsam
-            rerum et quo non odio asperiores quasi hic iure?
-          </p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium officia explicabo accusantium dolore, dolorum nam iure, atque labore minima suscipit quasi voluptate aliquam dicta nulla consequatur. Dignissimos sunt odio tempore, labore animi deleniti vero doloremque obcaecati aliquid dolorem quaerat beatae porro quasi praesentium, voluptas illum. Reprehenderit impedit totam, nisi beatae maxime veniam perspiciatis vitae error similique expedita eveniet alias quos tenetur iusto? Nobis incidunt assumenda beatae, inventore sit fugit ut nam, cum ex excepturi quos cumque pariatur corrupti provident suscipit enim unde delectus natus aperiam dolor numquam qui. Nisi laborum dolorum vero fugit modi neque, maxime, expedita fugiat assumenda alias ea dolor illo aliquam minima similique veritatis repellat aspernatur harum ex dolores suscipit magnam ad? Repudiandae corrupti quam reprehenderit doloribus, quae necessitatibus! Nemo temporibus reprehenderit nostrum iure eligendi at quod repudiandae labore, ducimus cumque qui. Animi maiores placeat, assumenda dolorem quae repellendus magnam nostrum aperiam praesentium, necessitatibus unde in corporis dolores? Illo earum iure officiis repellat tempora dolorum nostrum nam laborum iste enim ad perspiciatis dolor sint quasi veniam, porro consequuntur quam eius ipsam repudiandae aperiam, delectus suscipit! Nihil similique error soluta molestias qui, doloribus illum unde voluptatibus sint doloremque quidem beatae voluptas culpa tempore fugiat at facilis in. Provident.</p>
-        </Col>
-      </Row>
-    </Container>
-  );
+    const [menuState, setMenuState] = useState("");
+    const { allProductos } = useSelector(state => state.producto);
+    const productosFavoritos = allProductos.slice(0, 3);
+
+    const handleMenu = () => {
+        menuState == "" ? setMenuState("active") : setMenuState("");
+    };
+
+    return (
+        <main>
+            <section className="homeBanner">
+                <div className="homeBannerTextContainer">
+                    <h1 className="homeBannerTitle">
+                        BIENVENIDOS A <br />
+                        LOTUS FUSION
+                    </h1>
+                    <h2 className="homeBannerSubtitle">
+                        DONDE SE ENCUENTRAN <br />
+                        LA COMIDA RAPIDA <br />Y LA BUENA COMIDA
+                    </h2>
+                    <p className="homeBannerParagraph">
+                        Aquí encontrarás lo mejor de Asia combinado en una
+                        fantásticaFusión Asiática. Bienvenido y deje que
+                        nuestros felices empleadoslo lleven a un maravilloso
+                        viaje de sabor por Asia en un ambiente agradable y
+                        relajado.
+                    </p>
+                    <a className="homeMainBtn" href="#mainMenu">
+                        Menú
+                    </a>
+                </div>
+                <div className="homeBannerImgContainer">
+                    <img src={homeBannerImg} alt="" className="homeBannerImg" />
+                    <div className="homeBannerImgOverlay"></div>
+                </div>
+            </section>
+            <section className="homeInfo">
+                <div className="homeInfoImgContainer">
+                    <img src={homeAboutUsImg} alt="" className="homeInfoImg" />
+                </div>
+                <div className="homeInfoTextContainer">
+                    <h3 className="homeMainHeader">Sabor y calor de Asia</h3>
+                    <h2 className="homeMainTitle">
+                        BIENVENIDOS A <br />
+                        LOTUS FUSION
+                    </h2>
+                    <p className="homeInfoParagraph">
+                        Lotus Fusion es una cadena de restaurantes asiáticos
+                        donde la comida y las recetas son una combinación de
+                        diferentes partes de Asia, creando un concepto de fusión
+                        asiática.
+                        <br /> Lotus Fusion comenzó como un sencillo restaurante
+                        de comida rápida, comida rápida tailandesa, en un
+                        pequeño local en la ciudad de Tucumán en 2007. Desde
+                        entonces, tanto el restaurante como el concepto se han
+                        convertido en un restaurante de alta cocina con altos
+                        estándares y buena reputación.
+                        <br />
+                        <br /> Con el increíble servicio, los derechos de
+                        alcohol, la comida que siempre contiene ingredientes
+                        frescos y se cocina directamente a pedido pero aún así
+                        se entrega rápidamente a los clientes, así como el
+                        interior único y hogareño, esto rápidamente se convirtió
+                        en un concepto popular y ganador que estableció a Lotus
+                        Fusion. aparte de las otras cadenas asiáticas de comida
+                        rápida y los restaurantes.
+                        <br /> Pero también al crear un ambiente relajado para
+                        que nuestros clientes disfruten de estas comidas en el
+                        que puedan sentirse seguros y bienvenidos, así como el
+                        cuidado y el amor que se pone en preparar a nuestros
+                        clientes comidas irresistibles y deliciosas, logramos
+                        aprovechar esta oportunidad de ganar y retener a todos
+                        nuestros clientes.
+                        <br />
+                        <br /> Para nosotros en Lotus Fusion la experiencia y el
+                        bienestar del cliente es lo más importante ya que
+                        gracias a nuestros clientes el restaurante se mantiene
+                        firme, son ellos quienes SON la facturación que hace
+                        avanzar a Lotus Fusion. Por eso, es especialmente
+                        importante que siempre les mostremos por qué deberían
+                        elegir Lotus Fusion frente a cualquier otro restaurante.
+                    </p>
+                </div>
+            </section>
+            <section className="homeMenu" id="mainMenu">
+                <h3 className="homeMainHeader">Nuestro menú</h3>
+                <h2 className="homeMainTitle">PLATOS POPULARES</h2>
+                <div className="homeMenuCardContainer">
+                    {productosFavoritos.map(producto => {
+                        return (
+                            <MenuCard
+                                key={producto._id}
+                                id={producto._id}
+                                nombre={producto.nombre}
+                                detalle={producto.detalle}
+                                imagen={producto.imagen}
+                                precio={producto.precio}
+                            />
+                        );
+                    })}
+                </div>
+                <button
+                    className={
+                        "homeMainBtn" + " " + "seeMoreMenuBtn" + " " + menuState
+                    }
+                    onClick={handleMenu}
+                >
+                    Ver el menú completo
+                </button>
+                <div
+                    className={
+                        "homeMenuCardContainer" +
+                        " " +
+                        "seeMore" +
+                        " " +
+                        menuState
+                    }
+                >
+                    {allProductos.map(producto => {
+                        return (
+                            <MenuCard
+                                key={producto._id}
+                                id={producto._id}
+                                nombre={producto.nombre}
+                                detalle={producto.detalle}
+                                imagen={producto.imagen}
+                                precio={producto.precio}
+                            />
+                        );
+                    })}
+                </div>
+            </section>
+        </main>
+    );
 };
 
 export default Home;

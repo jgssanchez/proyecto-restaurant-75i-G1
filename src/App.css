@@ -1,90 +1,81 @@
 .mainSection {
     flex-grow: 1;
-  }
-
- body{
- 
-    height: 100vh;
-    margin-left: 0; 
-    transition: margin-left 0.3s ease; 
- }
-
- .shifted-content {
-   margin-left: 250px; 
-   transition: margin-left 0.3s ease; 
- } 
- .col-12.offcanvas-title.h5 {
-   margin-left: 100px;
 }
 
-.offcanvas .nav-tabs .nav-link{
---bs-nav-link-color: #232222;
---bs-nav-tabs-link-active-color: white;
+.shifted-content {
+    margin-left: 250px;
+    transition: margin-left 0.3s ease;
+}
+.col-12.offcanvas-title.h5 {
+    margin-left: 100px;
+}
+
+.offcanvas .nav-tabs .nav-link {
+    --bs-nav-link-color: #232222;
+    --bs-nav-tabs-link-active-color: white;
     --bs-nav-tabs-link-active-bg: #fdc500;
 }
 
 .offcanva-dashboard .btn-close {
-margin-bottom: 93px;
- --bs-btn-close-color: #fdc500
+    margin-bottom: 93px;
+    --bs-btn-close-color: #fdc500;
 }
-.offcanva-dashboard.offcanvas.offcanvas-start.show{
-   background-color: #232222;
-   color:#fdf9f3;
+.offcanva-dashboard.offcanvas.offcanvas-start.show {
+    background-color: #232222;
+    color: #fdf9f3;
 }
 .offcanva-dashboard svg {
-   margin-right: 8px;
-   margin-bottom: 5px;
+    margin-right: 8px;
+    margin-bottom: 5px;
 }
-.offcanva-dashboard a.nav-link{
-color:#fdf9f3;
-font-size: large;
+.offcanva-dashboard a.nav-link {
+    color: #fdf9f3;
+    font-size: large;
+}
+.link-logout.nav a.nav-link {
+    color: #fdc500;
+    font-size: x-large;
+}
+button.me-auto.btn.btn-link.btn.btn-primary,
+button.btn.btn-link.btn.btn-primary {
+    --bs-btn-color: white;
+    --bs-btn-bg: transparent;
+    --bs-btn-border-color: transparent;
+}
 
+button.btn.btn-link.btn.btn-primary {
+    margin-left: 160px;
 }
-.link-logout.nav a.nav-link{
-   color: #fdc500;
-   font-size:x-large
-}
-button.me-auto.btn.btn-link.btn.btn-primary, button.btn.btn-link.btn.btn-primary{
-   --bs-btn-color: white;
-   --bs-btn-bg: transparent;
-   --bs-btn-border-color: transparent; 
-  
-}
-
- button.btn.btn-link.btn.btn-primary{
-      margin-left: 160px;
-   }
-button.me-auto.btn.btn-link.btn.btn-primary:hover, button.btn.btn-link.btn.btn-primary:hover{
-background-color: transparent;
-color: #fdc500;
-
+button.me-auto.btn.btn-link.btn.btn-primary:hover,
+button.btn.btn-link.btn.btn-primary:hover {
+    background-color: transparent;
+    color: #fdc500;
 }
 
 @media (max-width: 576px) and (max-width: 768px) {
-   svg{
-      width: 30px;
-      height: 30px;
-
-     
-   }
-   
-   
- }
- @media (max-width: 768px) {
-   button.btn.btn-link.btn.btn-primary{
-      margin-left: 84px;
-   }
-   img.img-fluid.mx-auto{
-      max-width: 100%;
-       height: 75px;
-      }
- }
- @media (max-width: 576px){
-   img.img-fluid.mx-auto{
-      max-width: 100%;
-       height: 65px;
-      }
-   button.btn.btn-link.btn.btn-primary{
-      margin-left: 30px;
-   }
- }
+    svg {
+        width: 30px;
+        height: 30px;
+    }
+}
+@media (max-width: 768px) {
+    button.btn.btn-link.btn.btn-primary {
+        margin-left: 84px;
+    }
+    img.img-fluid.mx-auto {
+        max-width: 100%;
+        height: 75px;
+    }
+}
+@media (max-width: 576px) {
+    img.img-fluid.mx-auto {
+        max-width: 100%;
+        height: 65px;
+    }
+    button.btn.btn-link.btn.btn-primary {
+        margin-left: 30px;
+    }
+}
+html {
+    font-size: 100%;
+}
