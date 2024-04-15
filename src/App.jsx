@@ -37,12 +37,12 @@ function App() {
       <HashRouter>
         <Layout>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route exact path="/login" element={<Login />}></Route>
-            <Route path="*" element={<NotFound />}></Route>
-            <Route path="/register" element={<Register />}></Route>
-            <Route path="/details" element={<ProductDetails />}></Route>
-            <Route path="/carrito" element={<PaginaCarrito />}></Route>
+            <Route path="/" element={<Home />}/>
+            <Route path="/login" element={<Login />}/>
+            <Route path="*" element={<NotFound />}/>
+            <Route path="/register" element={<Register />}/>
+            <Route path="/details" element={<ProductDetails />}/>
+            <Route path="/carrito" element={<PaginaCarrito />}/>
             <Route path="/detalle/:id" element={<ProductDetails />} />
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/admin/usuarios" element={<UserList />} />
