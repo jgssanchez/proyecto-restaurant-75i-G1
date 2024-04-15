@@ -2,7 +2,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const clienteAxios = axios.create({
-    baseURL: "http://localhost:4000/api",
+    baseURL: "https://lotus-fusion-backend.vercel.app/",
     headers: {
         'Content-Type': 'application/json',
     },
