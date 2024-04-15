@@ -8,7 +8,7 @@ import NotFound from "./components/pages/notFound";
 import Layout from "./components/common/layout/layout";
 import PaginaCarrito from "./components/pages/carrito";
 import ProductDetails from "./components/pages/productDetails";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, HashRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getUsuario,
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />}></Route>
@@ -49,7 +49,7 @@ function App() {
             <Route path="/admin/productos" element={<ProductList />} />
           </Routes>
         </Layout>
-      </BrowserRouter>
+      </HashRouter>
     </>
   );
 }
