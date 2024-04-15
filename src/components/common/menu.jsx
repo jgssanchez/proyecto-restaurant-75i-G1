@@ -98,6 +98,14 @@ const Menu = () => {
             )}
             <Nav.Item>
               <Nav.Link
+                href="/Register"
+                className={`${opaco ? "text-white" : "text-black"} `}
+              >
+                Registrarse
+              </Nav.Link>
+            </Nav.Item>  
+            <Nav.Item>
+              <Nav.Link
                 href="/carrito"
                 className={`nav-link ${
                   opaco ? "text-light" : "text-black"

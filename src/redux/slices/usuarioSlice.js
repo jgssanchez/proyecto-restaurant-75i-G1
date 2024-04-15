@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUsuario, agregarCarrito, getCarrito } from "../actions/usuarioActions.js";
+import { getUsuario, agregarCarrito, getCarrito, getUsuarios } from "../actions/usuarioActions.js";
+
 
 const usuarioSlice = createSlice({
     name: 'usuarios',
     initialState: {
         estaLogueado: false,
         loading: true,
-        carrito: []
+        carrito: [],
+        usuarios: []
     },
     reducers: {
     },
@@ -50,6 +52,21 @@ const usuarioSlice = createSlice({
                 state.carrito = action.payload;
             })
             .addCase(getCarrito.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
+            })
+
+            
+            .addCase(getUsuarios.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(getUsuarios.fulfilled, (state, action) =>  {
+                
+                state.loading = false;
+                state.error = null;
+                state.usuarios = action.payload;
+            })
+            .addCase(getUsuarios.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.error.message;
             })

@@ -41,7 +41,7 @@ const ProductDetails = () => {
                     {producto != undefined ? (
                         <button
                             className="detailsProductAddToCart"
-                            onClick={e => handleCart(e)}
+                            
                         >
                             + Añadir a la Orden
                         </button>
