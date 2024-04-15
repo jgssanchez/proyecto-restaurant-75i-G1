@@ -1,0 +1,24 @@
+
+.navbar-nav .nav-item .nav-link {
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 60px;
+     
+   }
+ 
+ .nav-link .active{
+     color: #232222;
+   }
+ .nav-link .hover-text:hover{
+ color: yellow
+  }
+   
+   @media (max-width: 576px) and (max-width: 768px) {
+    
+     .navbar-nav .nav-item .nav-link {
+       margin: 0px 0px;
+     align-items: center;
+       }
+     
+   }
+  
