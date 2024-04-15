@@ -34,7 +34,7 @@ function App() {
 
   return (
     <>
-      <HashRouter>
+      <BrowserRouter>
         <Layout>
           <Routes>
             <Route path="/" element={<Home />}/>
@@ -49,7 +49,7 @@ function App() {
             <Route path="/admin/productos" element={<ProductList />} />
           </Routes>
         </Layout>
-      </HashRouter>
+      </BrowserRouter>
     </>
   );
 }
